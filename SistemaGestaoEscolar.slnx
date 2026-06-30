@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="SGE.Api/SGE.Api.csproj" />
+  <Project Path="SGE.Client/SGE.Client.csproj" />
+  <Project Path="SGE.Data/SGE.Data.csproj" />
+  <Project Path="SGE.Models/SGE.Models.csproj" />
+</Solution>
