@@ -1,6 +1,6 @@
 <Solution>
-  <Project Path="SGE.Api/SGE.Api.csproj" />
+  <Project Path="SGE.Api/SGE.Api.csproj" Id="c5343f6e-54b4-4bbd-9590-57a7d0672495" />
   <Project Path="SGE.Client/SGE.Client.csproj" />
-  <Project Path="SGE.Data/SGE.Data.csproj" />
+  <Project Path="SGE.Data/SGE.Data.csproj" Id="77bded11-865b-4cf1-b49b-0000f3fa1b35" />
   <Project Path="SGE.Models/SGE.Models.csproj" />
 </Solution>
