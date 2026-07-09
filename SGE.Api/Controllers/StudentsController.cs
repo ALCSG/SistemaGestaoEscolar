@@ -10,14 +10,13 @@ namespace SGE.Api.Controllers
     [RoutePrefix("api/students")]
     public class StudentsController : ApiController
     {
-        DataClasses1DataContext dc = new DataClasses1DataContext();
-
         // GET api/students
         // Lists all students with view vw_students to return corresponding StudentClassGroup too.
         [Route("")]
         public IHttpActionResult GetAll()
         {
-            using (var context = dc)
+
+            using (var context = new DataClasses1DataContext())
             {
                 var students = context.vw_Students
                     .OrderBy(s => s.Surname)
@@ -33,12 +32,15 @@ namespace SGE.Api.Controllers
         [Route("{id:int}")]
         public IHttpActionResult GetById(int id)
         {
-            using (var context = dc)
+            using (var context = new DataClasses1DataContext())
             {
                 var student = context.vw_Students.FirstOrDefault(s => s.StudentId == id);
 
                 if (student == null)
+                {
                     return NotFound();
+
+                }
 
                 return Ok(student);
             }
@@ -50,25 +52,38 @@ namespace SGE.Api.Controllers
         public IHttpActionResult Create([FromBody] Student newStudent)
         {
             if (newStudent == null)
+            {
                 return BadRequest("O corpo do pedido não pode estar vazio.");
+            }
 
             if (string.IsNullOrWhiteSpace(newStudent.Name) || string.IsNullOrWhiteSpace(newStudent.Surname))
+            {
                 return BadRequest("Nome e apelido são obrigatórios.");
+            }
 
             if (string.IsNullOrWhiteSpace(newStudent.Email) || !newStudent.Email.Contains("@"))
+            {
                 return BadRequest("Email inválido.");
+            }
 
             if (string.IsNullOrWhiteSpace(newStudent.Contact))
+            {
                 return BadRequest("Contacto é obrigatório.");
+            }
 
             if (string.IsNullOrWhiteSpace(newStudent.Address))
+            {
                 return BadRequest("Morada é obrigatória.");
+            }
 
-            using (var context = dc)
+            using (var context = new DataClasses1DataContext())
             {
                 bool emailExists = context.Students.Any(s => s.Email == newStudent.Email);
+                
                 if (emailExists)
+                {
                     return ResponseMessage(Request.CreateResponse(HttpStatusCode.Conflict, "Já existe um aluno com este email."));
+                }
 
                 if (newStudent.GroupId.HasValue)
                 {
@@ -88,39 +103,65 @@ namespace SGE.Api.Controllers
                     return InternalServerError(ex);
                 }
 
-                return Created($"api/students/{newStudent.StudentId}", newStudent);
+                return Created($"api/students/{newStudent.StudentId}", new
+                {
+                    newStudent.StudentId,
+                    newStudent.Name,
+                    newStudent.Surname,
+                    newStudent.DOB,
+                    newStudent.Contact,
+                    newStudent.Address,
+                    newStudent.Email,
+                    newStudent.GroupId
+                });
             }
         }
 
         // PUT api/students/5
         // Updates existing student.
+        [HttpPut]
         [Route("{id:int}")]
         public IHttpActionResult Update(int id, [FromBody] Student updatedStudent)
         {
             if (updatedStudent == null)
+            {
                 return BadRequest("O corpo do pedido não pode estar vazio.");
+            }
 
             if (string.IsNullOrWhiteSpace(updatedStudent.Name) || string.IsNullOrWhiteSpace(updatedStudent.Surname))
+            {
                 return BadRequest("Nome e apelido são obrigatórios.");
+            }
 
             if (string.IsNullOrWhiteSpace(updatedStudent.Email) || !updatedStudent.Email.Contains("@"))
+            {
                 return BadRequest("Email inválido.");
+            }
 
-            using (var context = dc)
+            using (var context = new DataClasses1DataContext())
             {
                 var existing = context.Students.FirstOrDefault(s => s.StudentId == id);
+                
                 if (existing == null)
+                {
                     return NotFound();
+                }
 
                 bool emailConflict = context.Students.Any(s => s.Email == updatedStudent.Email && s.StudentId != id);
+                
                 if (emailConflict)
+                {
                     return ResponseMessage(Request.CreateResponse(HttpStatusCode.Conflict, "Já existe outro aluno com este email."));
+                }
 
                 if (updatedStudent.GroupId.HasValue)
                 {
                     bool groupExists = context.StudentClassGroups.Any(g => g.StudentClassGroupId == updatedStudent.GroupId.Value);
+                    
                     if (!groupExists)
+                    {
                         return BadRequest($"A turma com Id {updatedStudent.GroupId} não existe.");
+                    }
                 }
 
                 existing.Name = updatedStudent.Name;
@@ -140,7 +181,17 @@ namespace SGE.Api.Controllers
                     return InternalServerError(ex);
                 }
 
-                return Ok(existing);
+                return Ok(new
+                {
+                    existing.StudentId,
+                    existing.Name,
+                    existing.Surname,
+                    existing.DOB,
+                    existing.Contact,
+                    existing.Address,
+                    existing.Email,
+                    existing.GroupId
+                });
             }
         }
 
@@ -149,11 +200,14 @@ namespace SGE.Api.Controllers
         [Route("{id:int}")]
         public IHttpActionResult Delete(int id)
         {
-            using (var context = dc)
+            using (var context = new DataClasses1DataContext())
             {
                 var existing = context.Students.FirstOrDefault(s => s.StudentId == id);
+                
                 if (existing == null)
+                {
                     return NotFound();
+                }
 
                 context.Students.DeleteOnSubmit(existing);
 
@@ -175,11 +229,14 @@ namespace SGE.Api.Controllers
         [Route("{id:int}/grades")]
         public IHttpActionResult GetGrades(int id)
         {
-            using (var context = dc)
+            using (var context = new DataClasses1DataContext())
             {
                 bool studentExists = context.Students.Any(s => s.StudentId == id);
+                
                 if (!studentExists)
+                {
                     return NotFound();
+                }
 
                 var averages = context.vw_EnrollmentAverages
                     .Where(a => a.StudentId == id)

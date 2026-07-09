@@ -63,7 +63,7 @@ namespace SGE.Data
     #endregion
 		
 		public DataClasses1DataContext() : 
-				base(global::SGE.Data.Properties.Settings.Default.SistemaGestaoEscolarConnectionString, mappingSource)
+				base(global::SGE.Data.Properties.Settings.Default.SistemaGestaoEscolarConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}
@@ -172,6 +172,14 @@ namespace SGE.Data
 			}
 		}
 		
+		public System.Data.Linq.Table<vw_Course> vw_Courses
+		{
+			get
+			{
+				return this.GetTable<vw_Course>();
+			}
+		}
+		
 		public System.Data.Linq.Table<vw_EnrollmentAverage> vw_EnrollmentAverages
 		{
 			get
@@ -188,11 +196,59 @@ namespace SGE.Data
 			}
 		}
 		
+		public System.Data.Linq.Table<vw_Event> vw_Events
+		{
+			get
+			{
+				return this.GetTable<vw_Event>();
+			}
+		}
+		
+		public System.Data.Linq.Table<vw_Grade> vw_Grades
+		{
+			get
+			{
+				return this.GetTable<vw_Grade>();
+			}
+		}
+		
+		public System.Data.Linq.Table<vw_Professor> vw_Professors
+		{
+			get
+			{
+				return this.GetTable<vw_Professor>();
+			}
+		}
+		
+		public System.Data.Linq.Table<vw_StudentClassGroup> vw_StudentClassGroups
+		{
+			get
+			{
+				return this.GetTable<vw_StudentClassGroup>();
+			}
+		}
+		
+		public System.Data.Linq.Table<vw_StudentEnrollment> vw_StudentEnrollments
+		{
+			get
+			{
+				return this.GetTable<vw_StudentEnrollment>();
+			}
+		}
+		
 		public System.Data.Linq.Table<vw_Student> vw_Students
 		{
 			get
 			{
 				return this.GetTable<vw_Student>();
+			}
+		}
+		
+		public System.Data.Linq.Table<vw_TeachingAssignment> vw_TeachingAssignments
+		{
+			get
+			{
+				return this.GetTable<vw_TeachingAssignment>();
 			}
 		}
 	}
@@ -2509,6 +2565,87 @@ namespace SGE.Data
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.vw_Courses")]
+	public partial class vw_Course
+	{
+		
+		private int _CourseId;
+		
+		private string _Name;
+		
+		private int _WeeklyHours;
+		
+		private bool _IsDeleted;
+		
+		public vw_Course()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CourseId", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int CourseId
+		{
+			get
+			{
+				return this._CourseId;
+			}
+			set
+			{
+				if ((this._CourseId != value))
+				{
+					this._CourseId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(150) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this._Name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WeeklyHours", DbType="Int NOT NULL")]
+		public int WeeklyHours
+		{
+			get
+			{
+				return this._WeeklyHours;
+			}
+			set
+			{
+				if ((this._WeeklyHours != value))
+				{
+					this._WeeklyHours = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDeleted", DbType="Bit NOT NULL")]
+		public bool IsDeleted
+		{
+			get
+			{
+				return this._IsDeleted;
+			}
+			set
+			{
+				if ((this._IsDeleted != value))
+				{
+					this._IsDeleted = value;
+				}
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.vw_EnrollmentAverages")]
 	public partial class vw_EnrollmentAverage
 	{
@@ -2797,6 +2934,753 @@ namespace SGE.Data
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.vw_Events")]
+	public partial class vw_Event
+	{
+		
+		private int _EventId;
+		
+		private string _Name;
+		
+		private string _Type;
+		
+		private System.DateTime _Date;
+		
+		private string _Location;
+		
+		private string _Description;
+		
+		public vw_Event()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EventId", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int EventId
+		{
+			get
+			{
+				return this._EventId;
+			}
+			set
+			{
+				if ((this._EventId != value))
+				{
+					this._EventId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(150) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this._Name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type", DbType="NVarChar(80) NOT NULL", CanBeNull=false)]
+		public string Type
+		{
+			get
+			{
+				return this._Type;
+			}
+			set
+			{
+				if ((this._Type != value))
+				{
+					this._Type = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date", DbType="DateTime NOT NULL")]
+		public System.DateTime Date
+		{
+			get
+			{
+				return this._Date;
+			}
+			set
+			{
+				if ((this._Date != value))
+				{
+					this._Date = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Location", DbType="NVarChar(200) NOT NULL", CanBeNull=false)]
+		public string Location
+		{
+			get
+			{
+				return this._Location;
+			}
+			set
+			{
+				if ((this._Location != value))
+				{
+					this._Location = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="NVarChar(MAX)")]
+		public string Description
+		{
+			get
+			{
+				return this._Description;
+			}
+			set
+			{
+				if ((this._Description != value))
+				{
+					this._Description = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.vw_Grades")]
+	public partial class vw_Grade
+	{
+		
+		private int _GradeId;
+		
+		private int _EnrollmentId;
+		
+		private int _StudentId;
+		
+		private string _StudentName;
+		
+		private int _CourseId;
+		
+		private string _CourseName;
+		
+		private int _GroupId;
+		
+		private string _GroupName;
+		
+		private decimal _Value;
+		
+		private decimal _Weight;
+		
+		private string _Type;
+		
+		private System.DateTime _Date;
+		
+		public vw_Grade()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GradeId", DbType="Int NOT NULL")]
+		public int GradeId
+		{
+			get
+			{
+				return this._GradeId;
+			}
+			set
+			{
+				if ((this._GradeId != value))
+				{
+					this._GradeId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EnrollmentId", DbType="Int NOT NULL")]
+		public int EnrollmentId
+		{
+			get
+			{
+				return this._EnrollmentId;
+			}
+			set
+			{
+				if ((this._EnrollmentId != value))
+				{
+					this._EnrollmentId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StudentId", DbType="Int NOT NULL")]
+		public int StudentId
+		{
+			get
+			{
+				return this._StudentId;
+			}
+			set
+			{
+				if ((this._StudentId != value))
+				{
+					this._StudentId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StudentName", DbType="NVarChar(201) NOT NULL", CanBeNull=false)]
+		public string StudentName
+		{
+			get
+			{
+				return this._StudentName;
+			}
+			set
+			{
+				if ((this._StudentName != value))
+				{
+					this._StudentName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CourseId", DbType="Int NOT NULL")]
+		public int CourseId
+		{
+			get
+			{
+				return this._CourseId;
+			}
+			set
+			{
+				if ((this._CourseId != value))
+				{
+					this._CourseId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CourseName", DbType="NVarChar(150) NOT NULL", CanBeNull=false)]
+		public string CourseName
+		{
+			get
+			{
+				return this._CourseName;
+			}
+			set
+			{
+				if ((this._CourseName != value))
+				{
+					this._CourseName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GroupId", DbType="Int NOT NULL")]
+		public int GroupId
+		{
+			get
+			{
+				return this._GroupId;
+			}
+			set
+			{
+				if ((this._GroupId != value))
+				{
+					this._GroupId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GroupName", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		public string GroupName
+		{
+			get
+			{
+				return this._GroupName;
+			}
+			set
+			{
+				if ((this._GroupName != value))
+				{
+					this._GroupName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Value", DbType="Decimal(4,2) NOT NULL")]
+		public decimal Value
+		{
+			get
+			{
+				return this._Value;
+			}
+			set
+			{
+				if ((this._Value != value))
+				{
+					this._Value = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Weight", DbType="Decimal(5,2) NOT NULL")]
+		public decimal Weight
+		{
+			get
+			{
+				return this._Weight;
+			}
+			set
+			{
+				if ((this._Weight != value))
+				{
+					this._Weight = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string Type
+		{
+			get
+			{
+				return this._Type;
+			}
+			set
+			{
+				if ((this._Type != value))
+				{
+					this._Type = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date", DbType="Date NOT NULL")]
+		public System.DateTime Date
+		{
+			get
+			{
+				return this._Date;
+			}
+			set
+			{
+				if ((this._Date != value))
+				{
+					this._Date = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.vw_Professors")]
+	public partial class vw_Professor
+	{
+		
+		private int _ProfessorId;
+		
+		private string _Name;
+		
+		private string _Surname;
+		
+		private string _FullName;
+		
+		private string _Contact;
+		
+		private string _Email;
+		
+		private string _Specialization;
+		
+		public vw_Professor()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProfessorId", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int ProfessorId
+		{
+			get
+			{
+				return this._ProfessorId;
+			}
+			set
+			{
+				if ((this._ProfessorId != value))
+				{
+					this._ProfessorId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this._Name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Surname", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		public string Surname
+		{
+			get
+			{
+				return this._Surname;
+			}
+			set
+			{
+				if ((this._Surname != value))
+				{
+					this._Surname = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FullName", DbType="NVarChar(201) NOT NULL", CanBeNull=false)]
+		public string FullName
+		{
+			get
+			{
+				return this._FullName;
+			}
+			set
+			{
+				if ((this._FullName != value))
+				{
+					this._FullName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Contact", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
+		public string Contact
+		{
+			get
+			{
+				return this._Contact;
+			}
+			set
+			{
+				if ((this._Contact != value))
+				{
+					this._Contact = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="NVarChar(150) NOT NULL", CanBeNull=false)]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this._Email = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Specialization", DbType="NVarChar(150) NOT NULL", CanBeNull=false)]
+		public string Specialization
+		{
+			get
+			{
+				return this._Specialization;
+			}
+			set
+			{
+				if ((this._Specialization != value))
+				{
+					this._Specialization = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.vw_StudentClassGroups")]
+	public partial class vw_StudentClassGroup
+	{
+		
+		private int _StudentClassGroupId;
+		
+		private string _Name;
+		
+		private string _Year;
+		
+		private bool _NightShift;
+		
+		public vw_StudentClassGroup()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StudentClassGroupId", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int StudentClassGroupId
+		{
+			get
+			{
+				return this._StudentClassGroupId;
+			}
+			set
+			{
+				if ((this._StudentClassGroupId != value))
+				{
+					this._StudentClassGroupId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this._Name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Year", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
+		public string Year
+		{
+			get
+			{
+				return this._Year;
+			}
+			set
+			{
+				if ((this._Year != value))
+				{
+					this._Year = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NightShift", DbType="Bit NOT NULL")]
+		public bool NightShift
+		{
+			get
+			{
+				return this._NightShift;
+			}
+			set
+			{
+				if ((this._NightShift != value))
+				{
+					this._NightShift = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.vw_StudentEnrollments")]
+	public partial class vw_StudentEnrollment
+	{
+		
+		private int _StudentEnrollmentId;
+		
+		private int _StudentId;
+		
+		private string _StudentName;
+		
+		private int _CourseId;
+		
+		private string _CourseName;
+		
+		private int _WeeklyHours;
+		
+		private int _GroupId;
+		
+		private string _GroupName;
+		
+		private string _GroupYear;
+		
+		private bool _NightShift;
+		
+		public vw_StudentEnrollment()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StudentEnrollmentId", DbType="Int NOT NULL")]
+		public int StudentEnrollmentId
+		{
+			get
+			{
+				return this._StudentEnrollmentId;
+			}
+			set
+			{
+				if ((this._StudentEnrollmentId != value))
+				{
+					this._StudentEnrollmentId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StudentId", DbType="Int NOT NULL")]
+		public int StudentId
+		{
+			get
+			{
+				return this._StudentId;
+			}
+			set
+			{
+				if ((this._StudentId != value))
+				{
+					this._StudentId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StudentName", DbType="NVarChar(201) NOT NULL", CanBeNull=false)]
+		public string StudentName
+		{
+			get
+			{
+				return this._StudentName;
+			}
+			set
+			{
+				if ((this._StudentName != value))
+				{
+					this._StudentName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CourseId", DbType="Int NOT NULL")]
+		public int CourseId
+		{
+			get
+			{
+				return this._CourseId;
+			}
+			set
+			{
+				if ((this._CourseId != value))
+				{
+					this._CourseId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CourseName", DbType="NVarChar(150) NOT NULL", CanBeNull=false)]
+		public string CourseName
+		{
+			get
+			{
+				return this._CourseName;
+			}
+			set
+			{
+				if ((this._CourseName != value))
+				{
+					this._CourseName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WeeklyHours", DbType="Int NOT NULL")]
+		public int WeeklyHours
+		{
+			get
+			{
+				return this._WeeklyHours;
+			}
+			set
+			{
+				if ((this._WeeklyHours != value))
+				{
+					this._WeeklyHours = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GroupId", DbType="Int NOT NULL")]
+		public int GroupId
+		{
+			get
+			{
+				return this._GroupId;
+			}
+			set
+			{
+				if ((this._GroupId != value))
+				{
+					this._GroupId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GroupName", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		public string GroupName
+		{
+			get
+			{
+				return this._GroupName;
+			}
+			set
+			{
+				if ((this._GroupName != value))
+				{
+					this._GroupName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GroupYear", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
+		public string GroupYear
+		{
+			get
+			{
+				return this._GroupYear;
+			}
+			set
+			{
+				if ((this._GroupYear != value))
+				{
+					this._GroupYear = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NightShift", DbType="Bit NOT NULL")]
+		public bool NightShift
+		{
+			get
+			{
+				return this._NightShift;
+			}
+			set
+			{
+				if ((this._NightShift != value))
+				{
+					this._NightShift = value;
+				}
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.vw_Students")]
 	public partial class vw_Student
 	{
@@ -3017,6 +3901,213 @@ namespace SGE.Data
 				if ((this._NightShift != value))
 				{
 					this._NightShift = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.vw_TeachingAssignments")]
+	public partial class vw_TeachingAssignment
+	{
+		
+		private int _TeachingAssignmentId;
+		
+		private int _ProfessorId;
+		
+		private string _ProfessorName;
+		
+		private string _ProfessorSpecialization;
+		
+		private int _GroupId;
+		
+		private string _GroupName;
+		
+		private string _GroupYear;
+		
+		private bool _NightShift;
+		
+		private int _CourseId;
+		
+		private string _CourseName;
+		
+		private int _WeeklyHours;
+		
+		public vw_TeachingAssignment()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TeachingAssignmentId", DbType="Int NOT NULL")]
+		public int TeachingAssignmentId
+		{
+			get
+			{
+				return this._TeachingAssignmentId;
+			}
+			set
+			{
+				if ((this._TeachingAssignmentId != value))
+				{
+					this._TeachingAssignmentId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProfessorId", DbType="Int NOT NULL")]
+		public int ProfessorId
+		{
+			get
+			{
+				return this._ProfessorId;
+			}
+			set
+			{
+				if ((this._ProfessorId != value))
+				{
+					this._ProfessorId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProfessorName", DbType="NVarChar(201) NOT NULL", CanBeNull=false)]
+		public string ProfessorName
+		{
+			get
+			{
+				return this._ProfessorName;
+			}
+			set
+			{
+				if ((this._ProfessorName != value))
+				{
+					this._ProfessorName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProfessorSpecialization", DbType="NVarChar(150) NOT NULL", CanBeNull=false)]
+		public string ProfessorSpecialization
+		{
+			get
+			{
+				return this._ProfessorSpecialization;
+			}
+			set
+			{
+				if ((this._ProfessorSpecialization != value))
+				{
+					this._ProfessorSpecialization = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GroupId", DbType="Int NOT NULL")]
+		public int GroupId
+		{
+			get
+			{
+				return this._GroupId;
+			}
+			set
+			{
+				if ((this._GroupId != value))
+				{
+					this._GroupId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GroupName", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		public string GroupName
+		{
+			get
+			{
+				return this._GroupName;
+			}
+			set
+			{
+				if ((this._GroupName != value))
+				{
+					this._GroupName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GroupYear", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
+		public string GroupYear
+		{
+			get
+			{
+				return this._GroupYear;
+			}
+			set
+			{
+				if ((this._GroupYear != value))
+				{
+					this._GroupYear = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NightShift", DbType="Bit NOT NULL")]
+		public bool NightShift
+		{
+			get
+			{
+				return this._NightShift;
+			}
+			set
+			{
+				if ((this._NightShift != value))
+				{
+					this._NightShift = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CourseId", DbType="Int NOT NULL")]
+		public int CourseId
+		{
+			get
+			{
+				return this._CourseId;
+			}
+			set
+			{
+				if ((this._CourseId != value))
+				{
+					this._CourseId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CourseName", DbType="NVarChar(150) NOT NULL", CanBeNull=false)]
+		public string CourseName
+		{
+			get
+			{
+				return this._CourseName;
+			}
+			set
+			{
+				if ((this._CourseName != value))
+				{
+					this._CourseName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WeeklyHours", DbType="Int NOT NULL")]
+		public int WeeklyHours
+		{
+			get
+			{
+				return this._WeeklyHours;
+			}
+			set
+			{
+				if ((this._WeeklyHours != value))
+				{
+					this._WeeklyHours = value;
 				}
 			}
 		}

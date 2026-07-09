@@ -33,5 +33,17 @@ namespace SGE.Data.Properties {
                 return ((string)(this["SistemaGestaoEscolarConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=SistemaGestaoEscolar.mssql.somee.com;Initial Catalog=SistemaGestaoEsc" +
+            "olar;User ID=ALCSG_SQLLogin_1;Password=6a8kbmnug5;Encrypt=False;TrustServerCerti" +
+            "ficate=True")]
+        public string SistemaGestaoEscolarConnectionString1 {
+            get {
+                return ((string)(this["SistemaGestaoEscolarConnectionString1"]));
+            }
+        }
     }
 }
